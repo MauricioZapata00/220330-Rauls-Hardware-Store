@@ -9,8 +9,8 @@ public class ProveedorDTO {
     @Id
     private String id;
 
-    private String nombreCliente;
-    private String celularCliente;
+    private String nombreProveedor;
+    private String celularProveedor;
     private String NIT;
 
     public ProveedorDTO(String NIT) {
@@ -26,19 +26,19 @@ public class ProveedorDTO {
     }
 
     public String getNombreCliente() {
-        return nombreCliente;
+        return nombreProveedor;
     }
 
     public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+        this.nombreProveedor = nombreCliente;
     }
 
     public String getCelularCliente() {
-        return celularCliente;
+        return celularProveedor;
     }
 
     public void setCelularCliente(String celularCliente) {
-        this.celularCliente = celularCliente;
+        this.celularProveedor = celularCliente;
     }
 
     public String getNIT() {

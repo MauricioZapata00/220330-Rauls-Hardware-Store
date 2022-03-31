@@ -25,9 +25,13 @@ public class ClientesService {
         return this.clientesRepository.save(clienteAGuardar);
     }
 
-    public Mono<ClientesDTO> actualizarCliente(String cedula){
+    public Mono<ClientesDTO> actualizarCliente(String cedula, String nombre, String celular){
         Mono<ClientesDTO> clienteActualizado = this.clientesRepository.findClientesDTOByCedula(cedula);
-        return clienteActualizado.flatMap(cliente -> this.clientesRepository.save(cliente)).cache();
+        return clienteActualizado.flatMap(cliente -> {
+            cliente.setNombreCliente(nombre);
+            cliente.setCelularCliente(celular);
+            return this.clientesRepository.save(cliente);
+        });
     }
 
     public void eliminarCliente(String nombre){

@@ -17,6 +17,9 @@ public class VolanteDTO {
     private String nombreProveedor;
     private HashMap<String, Integer> productosAIngresar;
 
+    public VolanteDTO() {
+    }
+
     public String getId() {
         return id;
     }

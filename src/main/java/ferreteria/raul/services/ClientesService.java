@@ -32,6 +32,6 @@ public class ClientesService {
 
     public void eliminarCliente(String nombre){
         Mono<ClientesDTO> cliente = this.clientesRepository.findClientesDTOByNombreCliente(nombre);
-        cliente.flatMap(clientesDTO -> this.clientesRepository.delete(clientesDTO)).cache();
+        cliente.flatMap(clientesDTO -> this.clientesRepository.delete(clientesDTO));
     }
 }

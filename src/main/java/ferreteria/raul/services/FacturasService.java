@@ -50,6 +50,6 @@ public class FacturasService {
 
     public void eliminarFactura(Long incrementable){
         Mono<FacturaDTO> factura = this.facturasRepository.findFacturaDTOByIncrementable(incrementable);
-        factura.flatMap(facturaDTO -> this.facturasRepository.delete(facturaDTO)).cache();
+        factura.flatMap(facturaDTO -> this.facturasRepository.delete(facturaDTO));
     }
 }

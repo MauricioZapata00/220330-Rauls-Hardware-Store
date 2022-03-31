@@ -15,6 +15,9 @@ public class VendedorDTO {
     private String celularVendedor;
     private String cedulaVendedor;
 
+    public VendedorDTO() {
+    }
+
     public VendedorDTO(String cedulaVendedor) {
         this.cedulaVendedor = cedulaVendedor;
     }

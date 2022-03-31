@@ -15,6 +15,9 @@ public class ProveedorDTO {
     private String celularProveedor;
     private String NIT;
 
+    public ProveedorDTO() {
+    }
+
     public ProveedorDTO(String NIT) {
         this.NIT = NIT;
     }

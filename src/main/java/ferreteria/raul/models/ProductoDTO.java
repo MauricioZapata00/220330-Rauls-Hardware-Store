@@ -15,6 +15,9 @@ public class ProductoDTO {
     private Integer cantidad;
     private Double precio;
 
+    public ProductoDTO() {
+    }
+
     public ProductoDTO(String nombreProducto, Double precio) {
         this.nombreProducto = nombreProducto;
         this.precio = precio;

@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(path = "/ferreteriaRaul")
+@RequestMapping( path = "/ferreteriaRaul")
 public class ClientesController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class ClientesController {
         return this.clientesService.encontrarClientes();
     }
 
-    @PostMapping(path = "/guardarCliente")
+    @PostMapping( path = "/guardarCliente")
     public Mono<ClientesDTO> saveClient(@RequestBody ClientesDTO cliente){
         return this.clientesService.guardarCliente(cliente.getCedulaCliente(),
                 cliente.getNombreCliente(),

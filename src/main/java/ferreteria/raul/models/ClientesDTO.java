@@ -13,6 +13,9 @@ public class ClientesDTO {
     private String celularCliente;
     private String cedulaCliente;
 
+    public ClientesDTO() {
+    }
+
     public ClientesDTO(String cedula) {
         this.cedulaCliente = cedula;
     }

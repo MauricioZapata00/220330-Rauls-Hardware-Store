@@ -18,9 +18,10 @@ public class ClientesService {
     }
 
     public Mono<ClientesDTO> guardarCliente(String cedula, String nombre, String celular){
-        ClientesDTO clienteAGuardar = new ClientesDTO(cedula);
+        ClientesDTO clienteAGuardar = new ClientesDTO();
         clienteAGuardar.setCelularCliente(celular);
         clienteAGuardar.setNombreCliente(nombre);
+        clienteAGuardar.setCedulaCliente(cedula);
         return this.clientesRepository.save(clienteAGuardar);
     }
 }

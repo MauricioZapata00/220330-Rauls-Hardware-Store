@@ -20,12 +20,12 @@ public class FacturasController {
     }
 
     @GetMapping(path = "/facturasPorNombre/{nombre}")
-    public Flux<FacturaDTO> getBillsByName(@RequestParam("nombre") String nombre){
+    public Flux<FacturaDTO> getBillsByName(@PathVariable String nombre){
         return this.facturasService.encontrarFacturasPorNombre(nombre);
     }
 
     @GetMapping(path = "/facturasPorFecha/{fecha}")
-    public Flux<FacturaDTO> getBillsByDate(@RequestParam("fecha") String fecha){
+    public Flux<FacturaDTO> getBillsByDate(@PathVariable String fecha){
         return this.facturasService.encontrarFacturasPorFecha(fecha);
     }
 
@@ -37,7 +37,7 @@ public class FacturasController {
     }
 
     @DeleteMapping(path = "/eliminarFactura/{incrementable}")
-    public void deleteBill(@RequestParam("incrementable") Long incrementable){
+    public void deleteBill(@PathVariable Long incrementable){
         this.facturasService.eliminarFactura(incrementable);
     }
 }

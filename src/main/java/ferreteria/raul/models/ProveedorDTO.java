@@ -30,19 +30,19 @@ public class ProveedorDTO {
         this.id = id;
     }
 
-    public String getNombreCliente() {
+    public String getNombreProveedor() {
         return nombreProveedor;
     }
 
-    public void setNombreCliente(String nombreCliente) {
+    public void setNombreProveedor(String nombreCliente) {
         this.nombreProveedor = nombreCliente;
     }
 
-    public String getCelularCliente() {
+    public String getCelularProveedor() {
         return celularProveedor;
     }
 
-    public void setCelularCliente(String celularCliente) {
+    public void setCelularProveedor(String celularCliente) {
         this.celularProveedor = celularCliente;
     }
 

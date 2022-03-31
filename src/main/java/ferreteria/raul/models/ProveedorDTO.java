@@ -3,6 +3,8 @@ package ferreteria.raul.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document(collection = "proveedores")
 public class ProveedorDTO {
 
@@ -47,5 +49,18 @@ public class ProveedorDTO {
 
     public void setNIT(String NIT) {
         this.NIT = NIT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProveedorDTO)) return false;
+        ProveedorDTO that = (ProveedorDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(nombreProveedor, that.nombreProveedor) && Objects.equals(celularProveedor, that.celularProveedor) && Objects.equals(getNIT(), that.getNIT());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), nombreProveedor, celularProveedor, getNIT());
     }
 }

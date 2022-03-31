@@ -25,4 +25,14 @@ public class ClientesController {
                 cliente.getNombreCliente(),
                 cliente.getCelularCliente());
     }
+
+    @PutMapping(path = "/modificarCliente")
+    public Mono<ClientesDTO> updateClient(@RequestBody ClientesDTO cliente){
+        return this.clientesService.actualizarCliente(cliente.getCedula());
+    }
+
+    @DeleteMapping(path = "/eliminarCliente")
+    public void deleteClient(@RequestBody ClientesDTO clientesDTO){
+        this.clientesService.eliminarCliente(clientesDTO.getNombreCliente());
+    }
 }

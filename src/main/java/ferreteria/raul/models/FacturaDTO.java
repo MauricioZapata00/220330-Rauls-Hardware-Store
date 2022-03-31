@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 @Document(collection = "facturas")
 public class FacturaDTO {
@@ -79,4 +80,16 @@ public class FacturaDTO {
         this.totalAPagar = totalAPagar;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FacturaDTO)) return false;
+        FacturaDTO that = (FacturaDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getIncrementable(), that.getIncrementable()) && Objects.equals(getFecha(), that.getFecha()) && Objects.equals(getProductos(), that.getProductos()) && Objects.equals(getNombreVendedor(), that.getNombreVendedor()) && Objects.equals(getNombreCliente(), that.getNombreCliente()) && Objects.equals(getTotalAPagar(), that.getTotalAPagar());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getIncrementable(), getFecha(), getProductos(), getNombreVendedor(), getNombreCliente(), getTotalAPagar());
+    }
 }

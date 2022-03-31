@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 @Document(collection = "volantes")
 public class VolanteDTO {
@@ -54,5 +55,18 @@ public class VolanteDTO {
 
     public void setProductosAIngresar(HashMap<String, Integer> productosAIngresar) {
         this.productosAIngresar = productosAIngresar;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof VolanteDTO)) return false;
+        VolanteDTO that = (VolanteDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getFecha(), that.getFecha()) && Objects.equals(getNITProveedor(), that.getNITProveedor()) && Objects.equals(getNombreProveedor(), that.getNombreProveedor()) && Objects.equals(getProductosAIngresar(), that.getProductosAIngresar());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFecha(), getNITProveedor(), getNombreProveedor(), getProductosAIngresar());
     }
 }

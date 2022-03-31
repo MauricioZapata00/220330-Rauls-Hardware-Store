@@ -3,6 +3,8 @@ package ferreteria.raul.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document(collection = "clientes")
 public class ClientesDTO {
 
@@ -58,5 +60,18 @@ public class ClientesDTO {
 
     public void setCedula(String cedula) {
         this.cedulaCliente = cedula;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClientesDTO)) return false;
+        ClientesDTO that = (ClientesDTO) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getNombreCliente(), that.getNombreCliente()) && Objects.equals(getCelularCliente(), that.getCelularCliente()) && Objects.equals(getCedulaCliente(), that.getCedulaCliente());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNombreCliente(), getCelularCliente(), getCedulaCliente());
     }
 }

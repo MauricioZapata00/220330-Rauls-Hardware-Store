@@ -20,6 +20,9 @@ public class FacturaDTO {
     private String nombreCliente;
     private Double totalAPagar;
 
+    public FacturaDTO() {
+    }
+
     public FacturaDTO(Long incrementable) {
         this.incrementable = incrementable;
     }

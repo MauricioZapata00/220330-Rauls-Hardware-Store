@@ -11,5 +11,5 @@ public interface FacturasRepository extends ReactiveMongoRepository<FacturaDTO, 
     Flux<FacturaDTO> findFacturaDTOByFecha(String fecha);
     Mono<FacturaDTO> findFacturaDTOByIncrementable(Long incrementable);
     Flux<FacturaDTO> findFacturaDTOByNombreCliente(String nombre);
-    FacturaDTO findTopByOrderByIncrementableDesc();
+    
 }

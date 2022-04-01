@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Random;
 
 @Service
 public class FacturasService {
@@ -24,12 +26,6 @@ public class FacturasService {
         return this.facturasRepository.findFacturaDTOByFecha(fecha);
     }
 
-    public Long obtenerAutoingrementable(){
-        FacturaDTO ultimaFactura = this.facturasRepository.findTopByOrderByIncrementableDesc();
-        Long ultimoValor = ultimaFactura.getIncrementable();
-        return (ultimoValor + 1);
-    }
-
     public Flux<FacturaDTO> encontrarFacturasPorNombre(String nombre){
         return this.facturasRepository.findFacturaDTOByNombreCliente(nombre);
     }
@@ -38,7 +34,8 @@ public class FacturasService {
                                            String nombreVendedor, String nombreCliente,
                                            Double totalAPagar){
         FacturaDTO facturaAGuardar = new FacturaDTO();
-        Long incrementable = this.obtenerAutoingrementable();
+        Random aleatorio = new SecureRandom();
+        Long incrementable = aleatorio.nextLong();
         facturaAGuardar.setIncrementable(incrementable);
         facturaAGuardar.setFecha(LocalDateTime.now().toString());
         facturaAGuardar.setProductos(productos);

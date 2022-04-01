@@ -45,8 +45,8 @@ public class FacturasService {
         return this.facturasRepository.save(facturaAGuardar);
     }
 
-    public void eliminarFactura(Long incrementable){
-        Mono<FacturaDTO> factura = this.facturasRepository.findFacturaDTOByIncrementable(incrementable);
-        factura.flatMap(facturaDTO -> this.facturasRepository.delete(facturaDTO));
+    public Mono<FacturaDTO> eliminarFactura(String id){
+        Mono<FacturaDTO> factura = this.facturasRepository.findById(id);
+        return factura.flatMap(facturaDTO -> this.facturasRepository.delete(facturaDTO).thenReturn(facturaDTO));
     }
 }

@@ -20,12 +20,12 @@ public class ProductosController {
     }
 
     @GetMapping(path = "/productosPorNombre/{nombre}")
-    public Mono<ProductoDTO> getProductByName(@PathVariable("nombre") String nombre){
+    public Flux<ProductoDTO> getProductByName(@PathVariable("nombre") String nombre){
         return this.productosService.encontrarProductoPorNombre(nombre);
     }
 
     @GetMapping(path = "/productosPorPrecio/{precio}")
-    public Mono<ProductoDTO> getProductByPrice(@PathVariable("precio") String textPrecio){
+    public Flux<ProductoDTO> getProductByPrice(@PathVariable("precio") String textPrecio){
         Double precio = Double.valueOf(textPrecio);
         return this.productosService.encontrarProductoPorPrecio(precio);
     }
@@ -36,27 +36,27 @@ public class ProductosController {
                 producto.getCantidad(), producto.getPrecio());
     }
 
-    @PutMapping(path = "/actualizarProductoCantidad/{cantidad}")
-    public Mono<ProductoDTO> updateQuantity(@RequestBody ProductoDTO producto,
+    @PutMapping(path = "/actualizarProductoCantidad/{id}/{cantidad}")
+    public Mono<ProductoDTO> updateQuantity(@PathVariable("id") String id,
                                             @PathVariable("cantidad") String textoCantidad){
         Integer cantidad = Integer.valueOf(textoCantidad);
-        return this.productosService.actualizarCantidad(producto.getNombreProducto(), cantidad);
+        return this.productosService.actualizarCantidad(id, cantidad);
     }
 
-    @PutMapping(path = "/actualizarProductoNombre/{nombreAnterior}")
-    public Mono<ProductoDTO> updateName(@PathVariable("nombreAnterior") String nombre,
-                                        @RequestBody ProductoDTO producto){
-        return this.productosService.actualizarNombre(nombre, producto.getNombreProducto());
+    @PutMapping(path = "/actualizarProductoNombre/{id}/{nuevoNombre}")
+    public Mono<ProductoDTO> updateName(@PathVariable("id") String id,
+                                        @PathVariable("nuevoNombre") String nombreNuevo){
+        return this.productosService.actualizarNombre(id, nombreNuevo);
     }
 
-    @PutMapping(path = "/actualizarProductoPrecio/{nombre}")
-    public Mono<ProductoDTO> updatePrice(@PathVariable("nombre") String nombre,
-                                         @RequestBody ProductoDTO producto){
-        return this.productosService.actualizarPrecio(nombre, producto.getPrecio());
+    @PutMapping(path = "/actualizarProductoPrecio/{id}/{precio}")
+    public Mono<ProductoDTO> updatePrice(@PathVariable("id") String id,
+                                         @PathVariable("precio") Double precio){
+        return this.productosService.actualizarPrecio(id, precio);
     }
 
-    @DeleteMapping(path = "/eliminarProducto/{nombre}")
-    public void deleteProduct(@PathVariable("nombre") String nombre){
-        this.productosService.eliminarProducto(nombre);
+    @DeleteMapping(path = "/eliminarProducto/{id}")
+    public Mono<ProductoDTO> deleteProduct(@PathVariable("id") String id){
+        return this.productosService.eliminarProducto(id);
     }
 }

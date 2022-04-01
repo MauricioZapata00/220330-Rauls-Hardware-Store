@@ -25,7 +25,7 @@ public class ProveedorsController {
     }
 
     @GetMapping(path = "/proveedorPorNombre/{nombre}")
-    public Mono<ProveedorDTO> getSupplierByName(@PathVariable("nombre") String nombre){
+    public Flux<ProveedorDTO> getSupplierByName(@PathVariable("nombre") String nombre){
         return this.proveedorsService.encontrarProveedorPorNombre(nombre);
     }
 
@@ -35,20 +35,20 @@ public class ProveedorsController {
                 proveedor.getCelularProveedor(), proveedor.getNIT());
     }
 
-    @PutMapping(path = "/actualizarProveedorNombre/{nombreAnterior}")
-    public Mono<ProveedorDTO> updateSupplierName(@PathVariable("nombreAnterior") String nombre,
-                                                 @RequestBody ProveedorDTO proveedor){
-        return this.proveedorsService.actualizarNombre(proveedor.getNIT(), nombre);
+    @PutMapping(path = "/actualizarProveedorNombre/{NIT}/{nuevoNombre}")
+    public Mono<ProveedorDTO> updateSupplierName(@PathVariable("NIT") String NIT,
+                                                 @PathVariable("nuevoNombre") String nombre){
+        return this.proveedorsService.actualizarNombre(NIT, nombre);
     }
 
-    @PutMapping(path = "/actualizarProveedorCelular/{celular}")
+    @PutMapping(path = "/actualizarProveedorCelular/{NIT}/{celular}")
     public Mono<ProveedorDTO> updateSupplierTelephone(@PathVariable("celular") String celular,
-                                                      @RequestBody ProveedorDTO proveedor){
-        return this.proveedorsService.actualizarCelular(proveedor.getNIT(), celular);
+                                                      @PathVariable("NIT") String NIT){
+        return this.proveedorsService.actualizarCelular(NIT, celular);
     }
 
     @DeleteMapping(path = "/eliminarProveedor/{NIT}")
-    public void deleteSupplier(@PathVariable("NIT") String NIT){
-        this.proveedorsService.eliminarProveedor(NIT);
+    public Mono<ProveedorDTO> deleteSupplier(@PathVariable("NIT") String NIT){
+        return this.proveedorsService.eliminarProveedor(NIT);
     }
 }

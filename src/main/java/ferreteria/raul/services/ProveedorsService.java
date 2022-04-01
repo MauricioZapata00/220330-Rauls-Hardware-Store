@@ -21,7 +21,7 @@ public class ProveedorsService {
         return this.proveedorsRepository.findProveedorDTOByNIT(NIT);
     }
 
-    public Mono<ProveedorDTO> encontrarProveedorPorNombre(String nombre){
+    public Flux<ProveedorDTO> encontrarProveedorPorNombre(String nombre){
         return this.proveedorsRepository.findProveedorDTOByNombreProveedor(nombre);
     }
 
@@ -49,8 +49,8 @@ public class ProveedorsService {
         });
     }
 
-    public void eliminarProveedor(String NIT){
+    public Mono<ProveedorDTO> eliminarProveedor(String NIT){
         Mono<ProveedorDTO> proveedorAEliminar = this.encontrarProveedorPorNIT(NIT);
-        proveedorAEliminar.flatMap(proveedor -> this.proveedorsRepository.delete(proveedor));
+        return proveedorAEliminar.flatMap(proveedor -> this.proveedorsRepository.delete(proveedor).thenReturn(proveedor));
     }
 }

@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface FacturasRepository extends ReactiveMongoRepository<FacturaDTO, String> {
     Flux<FacturaDTO> findFacturaDTOByFecha(String fecha);
-    Mono<FacturaDTO> findFacturaDTOByIncrementable(Long incrementable);
+    Flux<FacturaDTO> findFacturaDTOByIncrementable(Long incrementable);
     Flux<FacturaDTO> findFacturaDTOByNombreCliente(String nombre);
     
 }

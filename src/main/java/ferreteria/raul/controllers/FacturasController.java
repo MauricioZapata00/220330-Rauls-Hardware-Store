@@ -36,8 +36,8 @@ public class FacturasController {
                 factura.getTotalAPagar());
     }
 
-    @DeleteMapping(path = "/eliminarFactura/{incrementable}")
-    public void deleteBill(@PathVariable Long incrementable){
-        this.facturasService.eliminarFactura(incrementable);
+    @DeleteMapping(path = "/eliminarFactura/{id}")
+    public Mono<FacturaDTO> deleteBill(@PathVariable String id){
+        return this.facturasService.eliminarFactura(id);
     }
 }

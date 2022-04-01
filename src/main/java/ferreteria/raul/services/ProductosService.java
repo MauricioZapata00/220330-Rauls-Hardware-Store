@@ -17,11 +17,11 @@ public class ProductosService {
         return this.productosRepository.findAll();
     }
 
-    public Mono<ProductoDTO> encontrarProductoPorNombre(String nombre){
+    public Flux<ProductoDTO> encontrarProductoPorNombre(String nombre){
         return this.productosRepository.findProductoDTOByNombreProducto(nombre);
     }
 
-    public Mono<ProductoDTO> encontrarProductoPorPrecio(Double precio){
+    public Flux<ProductoDTO> encontrarProductoPorPrecio(Double precio){
         return this.productosRepository.findProductoDTOByPrecio(precio);
     }
 
@@ -33,32 +33,32 @@ public class ProductosService {
         return this.productosRepository.save(productoAGuardar);
     }
 
-    public Mono<ProductoDTO> actualizarCantidad(String nombre, Integer cantidad){
-        Mono<ProductoDTO> productoEncontrado = this.encontrarProductoPorNombre(nombre);
+    public Mono<ProductoDTO> actualizarCantidad(String id, Integer cantidad){
+        Mono<ProductoDTO> productoEncontrado = this.productosRepository.findById(id);
         return productoEncontrado.flatMap(producto -> {
             producto.setCantidad(cantidad);
             return this.productosRepository.save(producto);
         });
     }
 
-    public Mono<ProductoDTO> actualizarNombre(String nombreAnterior, String nombreNuevo){
-        Mono<ProductoDTO> productoEncontrado = this.encontrarProductoPorNombre(nombreAnterior);
+    public Mono<ProductoDTO> actualizarNombre(String id, String nombreNuevo){
+        Mono<ProductoDTO> productoEncontrado = this.productosRepository.findById(id);
         return productoEncontrado.flatMap(producto -> {
             producto.setNombreProducto(nombreNuevo);
             return this.productosRepository.save(producto);
         });
     }
 
-    public Mono<ProductoDTO> actualizarPrecio(String nombre, Double precio){
-        Mono<ProductoDTO> productoEncontrado = this.encontrarProductoPorNombre(nombre);
+    public Mono<ProductoDTO> actualizarPrecio(String id, Double precio){
+        Mono<ProductoDTO> productoEncontrado = this.productosRepository.findById(id);
         return productoEncontrado.flatMap(producto -> {
             producto.setPrecio(precio);
             return this.productosRepository.save(producto);
         });
     }
 
-    public void eliminarProducto(String nombre){
-        Mono<ProductoDTO> productoAEliminar = this.encontrarProductoPorNombre(nombre);
-        productoAEliminar.flatMap(producto -> this.productosRepository.delete(producto));
+    public Mono<ProductoDTO> eliminarProducto(String id){
+        Mono<ProductoDTO> productoAEliminar = this.productosRepository.findById(id);
+        return productoAEliminar.flatMap(producto -> this.productosRepository.delete(producto).thenReturn(producto));
     }
 }

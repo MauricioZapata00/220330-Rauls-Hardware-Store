@@ -54,13 +54,6 @@ public class ClientesDTO {
         this.celularCliente = celularCliente;
     }
 
-    public String getCedula() {
-        return cedulaCliente;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedulaCliente = cedula;
-    }
 
     @Override
     public boolean equals(Object o) {

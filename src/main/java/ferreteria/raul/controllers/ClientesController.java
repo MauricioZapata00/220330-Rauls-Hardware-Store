@@ -28,12 +28,11 @@ public class ClientesController {
 
     @PutMapping(path = "/modificarCliente")
     public Mono<ClientesDTO> updateClient(@RequestBody ClientesDTO cliente){
-        return this.clientesService.actualizarCliente(cliente.getCedula(),
-                cliente.getNombreCliente(), cliente.getCelularCliente());
+        return this.clientesService.actualizarCliente(cliente);
     }
 
-    @DeleteMapping(path = "/eliminarCliente")
-    public void deleteClient(@RequestBody ClientesDTO clientesDTO){
-        this.clientesService.eliminarCliente(clientesDTO.getNombreCliente());
+    @DeleteMapping(path = "/eliminarCliente/{id}")
+    public Mono<ClientesDTO> deleteClient(@PathVariable("id") String id){
+        return this.clientesService.eliminarCliente(id);
     }
 }

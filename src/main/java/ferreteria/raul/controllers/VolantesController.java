@@ -15,7 +15,7 @@ public class VolantesController {
     private VolantesService volantesService;
 
     @GetMapping(path = "/volantes")
-    public Flux<VolanteDTO> getAllBalances(){
+    public Flux<VolanteDTO> getAllTickets(){
         return this.volantesService.encontrarVolantes();
     }
 
@@ -36,7 +36,7 @@ public class VolantesController {
     }
 
     @DeleteMapping(path = "/eliminarVolante/{id}")
-    public void deleteTicket(@PathVariable("id") String id){
-        this.volantesService.eliminarVolante(id);
+    public Mono<VolanteDTO> deleteTicket(@PathVariable("id") String id){
+        return this.volantesService.eliminarVolante(id);
     }
 }

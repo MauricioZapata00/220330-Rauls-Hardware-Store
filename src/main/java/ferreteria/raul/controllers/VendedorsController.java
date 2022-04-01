@@ -25,7 +25,7 @@ public class VendedorsController {
     }
 
     @GetMapping(path = "/vendedoresPorNombre/{nombre}")
-    public Mono<VendedorDTO> getEmployeesByName(@PathVariable("nombre") String nombre){
+    public Flux<VendedorDTO> getEmployeesByName(@PathVariable("nombre") String nombre){
         return this.vendedorsService.encontrarVendedorPorNombre(nombre);
     }
 
@@ -42,7 +42,7 @@ public class VendedorsController {
     }
 
     @DeleteMapping(path = "/eliminarVendedor/{cedula}")
-    public void deleteEmployee(@PathVariable("cedula") String cedula){
-        this.vendedorsService.eliminarVendedor(cedula);
+    public Mono<VendedorDTO> deleteEmployee(@PathVariable("cedula") String cedula){
+        return this.vendedorsService.eliminarVendedor(cedula);
     }
 }

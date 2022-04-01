@@ -21,7 +21,7 @@ public class VendedorsService {
         return this.vendedorsRepository.findVendedorDTOByCedulaVendedor(cedula);
     }
 
-    public Mono<VendedorDTO> encontrarVendedorPorNombre(String nombre){
+    public Flux<VendedorDTO> encontrarVendedorPorNombre(String nombre){
         return this.vendedorsRepository.findVendedorDTOByNombreVendedor(nombre);
     }
 
@@ -42,8 +42,8 @@ public class VendedorsService {
         });
     }
 
-    public void eliminarVendedor(String cedula){
+    public Mono<VendedorDTO> eliminarVendedor(String cedula){
         Mono<VendedorDTO> vendedorAEliminar = this.encontrarVendedorPorCedula(cedula);
-        vendedorAEliminar.flatMap(vendedor -> this.vendedorsRepository.delete(vendedor));
+        return vendedorAEliminar.flatMap(vendedor -> this.vendedorsRepository.delete(vendedor).thenReturn(vendedor));
     }
 }

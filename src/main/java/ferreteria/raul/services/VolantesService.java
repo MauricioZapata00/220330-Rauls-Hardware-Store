@@ -38,8 +38,9 @@ public class VolantesService {
         return this.volantesRepository.save(volanteAGuardar);
     }
 
-    public void eliminarVolante(String id){
+    public Mono<VolanteDTO> eliminarVolante(String id){
         Mono<VolanteDTO> volanteAEliminar = this.volantesRepository.findById(id);
-        volanteAEliminar.flatMap(volante ->this.volantesRepository.delete(volante));
+        return volanteAEliminar.flatMap(volante ->this.volantesRepository.delete(volante)
+                .thenReturn(volante));
     }
 }
